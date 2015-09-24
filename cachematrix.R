@@ -1,17 +1,3 @@
-# makeVector <- function(x = numeric()) {
-# m <- NULL
-# set <- function(y) {
-#   x <<- y
-#   m <<- NULL
-# }
-# get <- function() x
-# setmean <- function(mean) m <<- mean
-# getmean <- function() m
-# list(set = set, get = get,
-#      setmean = setmean,
-#      getmean = getmean)
-# }
-
 makeCacheMatrix <- function(x = matrix()) {
  m <- NULL
  
@@ -42,8 +28,16 @@ cacheSolve <- function(x, ...) {
     message("getting cached data")
     return(m)
   }
+  
   matri <- x$get()
+  if (!nrow(matri) == ncol(matri))
+  {
+    message("not square matrix")
+    return
+  } else {
   m <- solve(matri)
   x$setinverse(m)
+  }
   m
+
 }
